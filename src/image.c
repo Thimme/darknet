@@ -322,7 +322,7 @@ void draw_detections_v3(image im, detection *dets, int num, float thresh, char *
         const int best_class = selected_detections[i].best_class;
         printf("%s,%.5f%%,", names[best_class],    selected_detections[i].det.prob[best_class]);
         if (ext_output)
-            printf("%4.0f,%4.0f,%4.0f,%4.0f;)",
+            printf("%.0f,%.0f,%.0f,%.0f;",
                 round((selected_detections[i].det.bbox.x - selected_detections[i].det.bbox.w / 2)*im.w),
                 round((selected_detections[i].det.bbox.y - selected_detections[i].det.bbox.h / 2)*im.h),
                 round(selected_detections[i].det.bbox.w*im.w), round(selected_detections[i].det.bbox.h*im.h));
@@ -334,7 +334,7 @@ void draw_detections_v3(image im, detection *dets, int num, float thresh, char *
                 printf("%s,%.5f%%,", names[j], selected_detections[i].det.prob[j]);
 
                 if (ext_output)
-                    printf("%4.0f,%4.0f,%4.0f,%4.0f;)",
+                    printf("%.0f,%.0f,%.0f,%.0f;",
                         round((selected_detections[i].det.bbox.x - selected_detections[i].det.bbox.w / 2)*im.w),
                         round((selected_detections[i].det.bbox.y - selected_detections[i].det.bbox.h / 2)*im.h),
                         round(selected_detections[i].det.bbox.w*im.w), round(selected_detections[i].det.bbox.h*im.h));
@@ -343,6 +343,8 @@ void draw_detections_v3(image im, detection *dets, int num, float thresh, char *
             }
         }
     }
+    
+    printf("\n");
 
     // image output
     qsort(selected_detections, selected_detections_num, sizeof(*selected_detections), compare_by_probs);
